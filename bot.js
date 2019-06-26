@@ -19,50 +19,25 @@ class EchoBot extends ActivityHandler {
                   {
                     "name": "CREDIT_CARD"
                   },
-                  {
-                    "name": "IP_ADDRESS"
-                  },
+                  
                   {
                     "name": "PHONE_NUMBER"
                   },
-                  {
-                    "name": "US_BANK_NUMBER"
-                  },
-                  {
-                    "name": "US_SSN"
-                  },
-                  {
-                    "name": "DOMAIN_NAME"
-                  },
-                  {
-                    "name": "DATE_TIME"
-                  },
+                  
                   {
                     "name": "PERSON"
                   },
                   {
-                    "name": "US_DRIVER_LICENSE"
-                  },
-                  {
-                    "name": "UK_NHS"
-                  },
-                  {
-                    "name": "CRYPTO"
-                  },
-                  {
-                    "name": "NRP"
-                  },
-                  {
-                    "name": "LOCATION"
-                  },
-                  {
-                    "name": "US_ITIN"
+                    "name": "PASSPORT"
                   },
                   {
                     "name": "US_PASSPORT"
                   },
                   {
                     "name": "IBAN_CODE"
+                  },
+                  {
+                    "name": "COMPANY_NAME"
                   }
                 ]
               },
@@ -263,6 +238,30 @@ class EchoBot extends ActivityHandler {
                   {
                     "fields": [
                       {
+                        "name": "PASSPORT"
+                      }
+                    ],
+                    "transformation": {
+                      "replaceValue": {
+                        "newValue": "<PASSPORT>"
+                      }
+                    }
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "COMPANY_NAME"
+                      }
+                    ],
+                    "transformation": {
+                      "replaceValue": {
+                        "newValue": "<COMPANY_NAME>"
+                      }
+                    }
+                  },
+                  {
+                    "fields": [
+                      {
                         "name": "IBAN_CODE"
                       }
                     ],
@@ -279,8 +278,7 @@ class EchoBot extends ActivityHandler {
               return res.data;
             })
             .catch((error) => {
-              console.error(error)
-              return "Error: " + error.response.data
+              return `${ context.activity.text }` // "Error: " + error.response.data
             }) 
             
             
@@ -294,7 +292,7 @@ class EchoBot extends ActivityHandler {
             const membersAdded = context.activity.membersAdded;
             for (let cnt = 0; cnt < membersAdded.length; ++cnt) {
                 if (membersAdded[cnt].id !== context.activity.recipient.id) {
-                    await context.sendActivity('Hello and welcome to Presidio-bot!');
+                    await context.sendActivity('Hello, welcome to Presidio-bot!');
                 }
             }
             // By calling next() you ensure that the next BotHandler is run.
